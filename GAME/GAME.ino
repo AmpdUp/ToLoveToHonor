@@ -17,8 +17,8 @@
 #define BLed A4
 #define GLed A5
 
-int ON = 0;
-int OFF = 1;
+int ON = 1;
+int OFF = 0;
 
 void setup()
 {
@@ -68,45 +68,52 @@ void loop()
   if (Blue == 1){
       if(ColorState == "Blue"){
         Serial.println("Win");
+        delay(500);
         DancyDance();
       }
       else{
         Serial.println("Lose");
+        delay(500);
       }
   }
 
   else if (Green == 1){
       if(ColorState == "Green"){
         Serial.println("Win");
+        delay(500);
         DancyDance();
       }
       else{
         Serial.println("Lose");
+        delay(500);
       }
   }
 
   else if (Red == 1){
       if(ColorState == "Red"){
         Serial.println("Win");
+        delay(500);
         DancyDance();
       }
       else{
         Serial.println("Lose");
+        delay(500);
       }
   }
 
   else if (Purple == 1){
       if(ColorState == "Purple"){
         Serial.println("Win");
+        delay(500);
         DancyDance();
       }
       else{
         Serial.println("Lose");
+        delay(500);
       }
   }
 }
 
-int WaitingTime = 500;
 int NewMillis = 0;
 int i = 0;
 int val = 7;
@@ -114,7 +121,8 @@ int val = 7;
 String value(){
 
   int CurrentMillis = millis();
-  
+  int WaitingTime = 500;
+
   if (CurrentMillis - NewMillis >= WaitingTime){
     val = rand() %7+1;
     NewMillis = CurrentMillis;
@@ -180,19 +188,62 @@ String value(){
 }
 
 int DancyDance(){
+    
   digitalWrite(BlueLed, OFF);
   digitalWrite(GreenLed, OFF);
   digitalWrite(RedLed, OFF);
   digitalWrite(PurpleLed, OFF);
 
-  delay(500);
+  bool state = 0;
+  int end = 1;
+  
+  while(end != 0){
+       
+    int CurrentMillis = millis();
+    int WaitingTime = 500;
 
-  digitalWrite(BlueLed, ON);
-  digitalWrite(GreenLed, ON);
-  digitalWrite(RedLed, ON);
-  digitalWrite(PurpleLed, ON);
-
-  delay(500);
+  	if (CurrentMillis - NewMillis >= WaitingTime){
+      if(state == 1){
+        digitalWrite(BlueLed, ON);
+        digitalWrite(GreenLed, ON);
+        digitalWrite(RedLed, ON);
+        digitalWrite(PurpleLed, ON);
+        state = 0;
+        Serial.println("ON");
+      }
+      else{
+        digitalWrite(BlueLed, OFF);
+        digitalWrite(GreenLed, OFF);
+        digitalWrite(RedLed, OFF);
+        digitalWrite(PurpleLed, OFF);
+        state = 1;
+        Serial.println("OFF");
+      }
+      NewMillis = CurrentMillis;
+  	}
+    
+    bool Blue = digitalRead(BlueButton);
+  	bool Green = digitalRead(GreenButton);
+  	bool Red = digitalRead(RedButton);
+  	bool Purple = digitalRead(PurpleButton);
+    
+    if(
+      Blue == 1 or
+      Green == 1 or
+      Red == 1 or
+      Purple == 1
+    ){
+      end = 0;
+      Serial.println("SEGUEE");
+      delay(500);
+      digitalWrite(BlueLed, ON);
+      digitalWrite(GreenLed, ON);
+      digitalWrite(RedLed, ON);
+      digitalWrite(PurpleLed, ON);
+    }
+    else{end = 1;}
+  }
+  
 }
 
 int RuleDefining(){
