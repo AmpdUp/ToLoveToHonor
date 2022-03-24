@@ -1,3 +1,9 @@
+#include "Pitches.h"
+#include "Rules.h"
+#include "Win.h"
+#include "Lose.h"
+#include "Power_UP.h"
+
 #define BlueLed 13
 #define GreenLed 12
 #define RedLed 11
@@ -17,15 +23,13 @@
 #define BLed A4
 #define GLed A5
 
-int ON = 1;
-int OFF = 0;
+int ON = 0;
+int OFF = 1;
 
 void setup()
 {
   Serial.begin(9600);
-
-  RuleDefining();
-  
+ 
   pinMode(BlueLed, OUTPUT);
   pinMode(GreenLed, OUTPUT);
   pinMode(RedLed, OUTPUT);
@@ -49,7 +53,11 @@ void setup()
   digitalWrite(GreenLed, ON);
   digitalWrite(RedLed, ON);
   digitalWrite(PurpleLed, ON);
-    
+
+  int Power_UP();
+  Power_UP();
+  int RuleDefining();
+  RuleDefining();
 }
 
 void loop()
@@ -60,6 +68,7 @@ void loop()
   bool Purple = digitalRead(PurpleButton);
 	
   int DancyDance();
+  int Cry();
  
   value();
   String ColorState = value();
@@ -74,6 +83,7 @@ void loop()
       else{
         Serial.println("Lose");
         delay(500);
+        Cry();
       }
   }
 
@@ -86,6 +96,7 @@ void loop()
       else{
         Serial.println("Lose");
         delay(500);
+        Cry();
       }
   }
 
@@ -98,6 +109,7 @@ void loop()
       else{
         Serial.println("Lose");
         delay(500);
+        Cry();
       }
   }
 
@@ -110,6 +122,7 @@ void loop()
       else{
         Serial.println("Lose");
         delay(500);
+        Cry();
       }
   }
 }
@@ -123,8 +136,10 @@ String value(){
   int CurrentMillis = millis();
   int WaitingTime = 500;
 
+  randomSeed(analogRead(0));
+
   if (CurrentMillis - NewMillis >= WaitingTime){
-    val = rand() %7+1;
+    val = random(0,7+1);
     NewMillis = CurrentMillis;
   }
 
@@ -196,13 +211,15 @@ int DancyDance(){
 
   bool state = 0;
   int end = 1;
-  
+  int Win();
+  Win();
+
   while(end != 0){
        
     int CurrentMillis = millis();
     int WaitingTime = 500;
 
-  	if (CurrentMillis - NewMillis >= WaitingTime){
+  	if(CurrentMillis - NewMillis >= WaitingTime){
       if(state == 1){
         digitalWrite(BlueLed, ON);
         digitalWrite(GreenLed, ON);
@@ -243,7 +260,71 @@ int DancyDance(){
     }
     else{end = 1;}
   }
-  
+  RuleDefining();
+  int Rules();
+  Rules();
+}
+
+int Cry(){
+  digitalWrite(BlueLed, OFF);
+  digitalWrite(GreenLed, OFF);
+  digitalWrite(RedLed, OFF);
+  digitalWrite(PurpleLed, OFF);
+
+  bool state = 0;
+  int end = 1;
+  int Lose();
+  Lose();
+
+  while(end != 0){
+       
+    int CurrentMillis = millis();
+    int WaitingTime = 1000;
+
+  	if(CurrentMillis - NewMillis >= WaitingTime){
+      if(state == 1){
+        digitalWrite(BlueLed, ON);
+        digitalWrite(GreenLed, ON);
+        digitalWrite(RedLed, ON);
+        digitalWrite(PurpleLed, ON);
+        state = 0;
+        Serial.println("ON");
+      }
+      else{
+        digitalWrite(BlueLed, OFF);
+        digitalWrite(GreenLed, OFF);
+        digitalWrite(RedLed, OFF);
+        digitalWrite(PurpleLed, OFF);
+        state = 1;
+        Serial.println("OFF");
+      }
+      NewMillis = CurrentMillis;
+  	}
+    
+    bool Blue = digitalRead(BlueButton);
+  	bool Green = digitalRead(GreenButton);
+  	bool Red = digitalRead(RedButton);
+  	bool Purple = digitalRead(PurpleButton);
+    
+    if(
+      Blue == 1 or
+      Green == 1 or
+      Red == 1 or
+      Purple == 1
+    ){
+      end = 0;
+      Serial.println("SEGUEE");
+      delay(500);
+      digitalWrite(BlueLed, ON);
+      digitalWrite(GreenLed, ON);
+      digitalWrite(RedLed, ON);
+      digitalWrite(PurpleLed, ON);
+    }
+    else{end = 1;}
+  }
+  RuleDefining();
+  int Rules();
+  Rules();
 }
 
 int RuleDefining(){
@@ -256,12 +337,12 @@ int RuleDefining(){
   int bit1 = random(0, 2);
   int bit2 = random(0, 2);
   int bit3 = random(0, 2);
-/*
+  /*
   Serial.println(bit0);
   Serial.println(bit1);
   Serial.println(bit2);
   Serial.println(bit3);
-*/  
+  */  
   digitalWrite(LedGame0, bit0);
   digitalWrite(LedGame1, bit1);
   digitalWrite(LedGame2, bit2);
