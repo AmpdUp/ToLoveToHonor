@@ -26,5 +26,46 @@ Para isso decidimos utilizar um Arduino Uno, utilizando os seguintes componentes
 | LED Central B  |      A4     | Led Central                                  |
 | LED Central G  |      A5     | Led Central                                  |
   
+  
+<img src="https://github.com/PedroTorrado/Projeto-SDAC/blob/main/Images/Circuit.png" width="600"/>
+
 </div>
 
+## Código
+
+O programa começa por incluir as bibliotecas "Pitches.h", "Power_UP.h", "Rules.h", "Win.h" e "Lose.h" que são bibliotecas criadas para este jogo com o propósito de tocar músicas ou Tons por frequência a partir do Buzzer cujo volume pode ser controlado a partir do potenciometro.
+
+```C++
+#include "Pitches.h"
+#include "Rules.h"
+#include "Win.h"
+#include "Lose.h"
+#include "Power_UP.h"
+```
+Como funcionam estes? 
+Por exemplo: 
+
+
+
+Após isso o programa começa por definir os componentes e os respetivos Pins como descritos na tabela anterior.
+
+```C++
+#define BlueLed 13
+#define GreenLed 12
+#define RedLed 11
+#define PurpleLed 10
+
+#define LedGame0 A1
+#define LedGame1 8
+#define LedGame2 A2
+#define LedGame3 9
+
+#define BlueButton 7
+#define GreenButton 6
+#define RedButton 5
+#define PurpleButton 4
+
+#define RLed A3
+#define BLed A4
+#define GLed A5
+```
