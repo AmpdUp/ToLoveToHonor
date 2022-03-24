@@ -1,5 +1,4 @@
-#include "pitches.h"
-
+//notas da musica
 int melodyWin[] = {
   NOTE_G4,    //1
   NOTE_C5,    //2
@@ -37,22 +36,22 @@ int melodyWin[] = {
 
 };
 
-
+//tempo de duração de cada nota
 int noteDurationsWin[] = {
  
 8,8,8,8,8,8,3,3,8,8,8,8,8,8,3,3,8,8,8,8,8,8,3,8,8,8,2,};
 
 int Win(){
-  
+  //Numero de notas a serem tocadas
   for (int thisNote = 0; thisNote < 27; thisNote++) {
-
+//Calculo para obter o tempo que a nota vai durar
     int noteDurationWin = 1000 / noteDurationsWin[thisNote];
     tone(3, melodyWin[thisNote], noteDurationWin);
 
-   
+    //Pausa entre notas
     int pauseBetweenNotes = noteDurationWin * 1;
     delay(pauseBetweenNotes);
-    
+    //Pin do buzzer
     noTone(3);
     
   }
