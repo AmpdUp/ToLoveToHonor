@@ -1,3 +1,4 @@
+//Todas as notas de um piano e suas correspetivas frequencias (B0 até DS8)
 #define no  0
 
 #define NOTE_B0  31
