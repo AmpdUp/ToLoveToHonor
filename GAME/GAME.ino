@@ -139,7 +139,7 @@ String value(){
   randomSeed(analogRead(0));
 
   if (CurrentMillis - NewMillis >= WaitingTime){
-    val = random(0,7+1);
+    val = random(0,8);
     NewMillis = CurrentMillis;
   }
 
