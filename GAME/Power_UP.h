@@ -1,5 +1,3 @@
-#include "pitches.h"
-
 int melodyON[] = {
   NOTE_C7,
   NOTE_E7,
