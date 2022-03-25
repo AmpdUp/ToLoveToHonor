@@ -128,7 +128,6 @@ void loop()
 }
 
 int NewMillis = 0;
-int i = 0;
 int val = 7;
 
 String value(){
