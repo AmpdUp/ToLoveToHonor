@@ -27,7 +27,7 @@ Para isso decidimos utilizar um Arduino Uno, utilizando os seguintes componentes
 | LED Central RGB G  |      A5     | Led Central                                  |
   
   
-<img src="https://github.com/PedroTorrado/Projeto-SDAC/blob/main/Images/Circuit.png" width="600"/>
+<img src="https://github.com/PedroTorrado/Projeto-SDAC/blob/d259d88f4ec4b43909e0990faefa7ffc6630c431/Images/Circuit.png" width="600"/>
 
 </div>
 
@@ -390,4 +390,8 @@ Juntando tudo isto é possível reproduzir-mos um programa que obedece às regra
 
 Para utilização deste programa foi desenvolvido o seguinte PCB:
 
+<div align="center">
 
+<img src="https://github.com/PedroTorrado/Projeto-SDAC/blob/d259d88f4ec4b43909e0990faefa7ffc6630c431/Images/PCB.png" width="600"/>
+  
+</dic>
