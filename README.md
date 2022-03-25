@@ -54,36 +54,10 @@ O programa começa por incluir as bibliotecas "Pitches.h", "Power_UP.h", "Rules.
 ```
 Como funcionam estes? 
 
-Por exemplo: 
-Começando por introduzir a biblioteca que contem tonas as notas necessárias para produzir as músicas do jogo.
-```C++
-#define NOTE_C4  262
-#define NOTE_CS4 277
-#define NOTE_D4  294
-#define NOTE_DS4 311
-#define NOTE_E4  330
-#define NOTE_F4  349
-#define NOTE_FS4 370
-#define NOTE_G4  392
-#define NOTE_GS4 415
-#define NOTE_A4  440
-#define NOTE_AS4 466
-#define NOTE_B4  494
-#define NOTE_C5  523
-```
-*esta não é a biblioteca completa(https://github.com/Cordelios810/Projeto-SDAC/blob/9f65239314f14a2f93a36d43e19352b88c2265a8/GAME/Pitches.h)
-
-Cada um destas linhas de código é composto pelo nome da nota
-```C++
-NOTE_C4
-```
-E a frequência atribuída a essa nota
-```C++
-262
-```
-Sendo incluindo a biblioteca das notas no código agora é possível programar as músicas que serão tocadas no buzzer.
-
 Por exemplo:
+
+## Músicas / Buzzer
+
 ```C++
 int melodyRules[] = {
   NOTE_C7,
@@ -230,4 +204,190 @@ int RuleDefining(){
 ```
 
 Utilizamos assim a funçãi random(0, 2) para identificar aleatóriamente valores entre 0 e 1 para cada um dos 4 Bits e uma vez que estes valores são 0 e 1 podem ser utilizados como "HIGH" e "LOW" pelos LEDs e definir assim o número aleatório.
+
+## Led Central
+
+Para termos um LED central com uma cor gerada automáticamente criámos uma função chamada value() que funciona criando um valor aleatório de 0 a 7 com a mesma função random() que na secção anterior contudo esta tem que acontecer de x em x tempo, neste caso escolhe-mos meio segundo ou 500ms.
+
+De forma a que algo aconteça em x em x tempo muitas vezes utiliza-se delays em programas deste género, contudo como o micro-processador tem que se encontrar disponível para ler os INPUTS dos botões não se podem usar delays. Assim, de forma a evitar a interrupção do funcionamento do micro-processador, decidimos utilizar o clock interno do mesmo através da função millis(). 
+
+millis() é uma função que disponibiliza o número de milissegundos que passaram após ligar o micro-processador. Assim pode ser utilizado da seguinte forma:
+
+```C++
+int NewMillis = 0;
+int val = 7; // used as default valur of switch()
+
+String value(){
+
+  int CurrentMillis = millis();
+  int WaitingTime = 500;
+
+  randomSeed(analogRead(0));
+
+  if (CurrentMillis - NewMillis >= WaitingTime){
+    val = random(0,7+1);
+    NewMillis = CurrentMillis;
+  }
+```
+
+Para a função de tempo, são criadas três variáveis, uma fora da função repetida, sendo este NewMillis e duas dentro (deste caso de value()), CurrentMillis e Waiting Time.
+
+Assim, NewMillis é definido como 0 (de inicio), e cada vez que value() se repete, CurrentMillis é igualado a millis() (sendo assim o valor de ms do clock do arduino), WaitingTime é ainda definido como 500 (milissegundos ou ms). Após isso é criada uma função if() que verifica se a diferença entre CurrentMillis e NewMillis é maior ou igual ao WaitingTime.
+
+Resumindo quando o micro-processador começa a contar este if() espera até ser 500 (500 - 0 >= 500) (e cria um novo valor aleatório para val), depois de este alcançar 500 NewMillis é igualado a esse valor e assim apenas quando chegar a 1000 (1000 - 500 >= 500) o if() ocorre e assim se repete para cada múltiplo de 500.
+
+Uma vez que o valor val é alterada a cada 500 ms, é criada uma função switch() que a cada valor aleatório entre 0 e 7, ele reproduz um valor de cor para uma string chamada Color.
+
+```C++
+  String Color;
+  
+  switch(val){
+
+    case 1 :  
+      Color = "Red";
+      digitalWrite(RLed, ON);
+      digitalWrite(GLed, OFF);
+      digitalWrite(BLed, OFF);
+      break;
+
+    case 2 :  
+      Color = "Purple";
+      digitalWrite(RLed, ON);
+      digitalWrite(GLed, OFF);
+      digitalWrite(BLed, ON);
+      break;
+```
+
+Após isto termina a função value fazendo return do valor de Color.
+
+## Botões e LED de utilizador
+
+Para que o jogo funcione é necessário verificar assim os INPUTS dos utilizadores/jogadores e verificar se o LED central se encontra ou não na cor pretendida e após isso resultar na vitória ou derrota do jogador e reproduzir as ações necessárias para demonstrar isso.
+
+Isto foi feito dentro do void loop() da seguinte forma:
+
+```C++
+
+void loop()
+{     
+  bool Blue = digitalRead(BlueButton);
+  bool Green = digitalRead(GreenButton);
+  bool Red = digitalRead(RedButton);
+  bool Purple = digitalRead(PurpleButton);
+
+```
+
+Aqui ps botões são definidos como valores booleanos (0 ou 1).
+
+```C++
+value();
+  String ColorState = value();
+```
+
+É chamada a função value() para que os LED que define a cor central seja demonstrado como pertendido (aleatórios) e é criada uma variável, ColorState, com esse mesmo valor.
+
+```C++
+if (Blue == 1){
+      if(ColorState == "Blue"){
+        Serial.println("Win");
+        delay(500);
+        DancyDance();
+      }
+      else{
+        Serial.println("Lose");
+        delay(500);
+        Cry();
+      }
+  }
+```
+
+Cada vez que um botão é definido como 1, é verificado se este, é igual à cor do central, como apresentado acima. Caso seja, é reproduzida a função DancyDance, caso não seja é reproduzida a função Cry(). E isto é repetido a partir de vários if(), else if() ou else de forma a verificar todos os botões para cada uma das cores. 
+
+*Agora, como funcionam as funções DancyDance() e Cry()?* 
+
+```C++
+int DancyDance(){
+    
+  digitalWrite(BlueLed, OFF);
+  digitalWrite(GreenLed, OFF);
+  digitalWrite(RedLed, OFF);
+  digitalWrite(PurpleLed, OFF);
+```
+
+Para começar todos os LEDS dos utilizadores são desligados.
+
+```C++
+  bool state = 0;
+  int end = 1;
+  int Win();
+  Win();
+```
+
+São criadas as variáveis state e end e é chamada a função Win() da biblioteca Win.h de forma a reproduzir a música de vitória.
+
+```C++
+  while(end != 0){
+       
+    int CurrentMillis = millis();
+    int WaitingTime = 500;
+
+    if(CurrentMillis - NewMillis >= WaitingTime){
+      if(state == 1){
+        digitalWrite(BlueLed, ON);
+        digitalWrite(GreenLed, ON);
+        digitalWrite(RedLed, ON);
+        digitalWrite(PurpleLed, ON);
+        state = 0;
+        Serial.println("ON");
+      }
+      else{
+        digitalWrite(BlueLed, OFF);
+        digitalWrite(GreenLed, OFF);
+        digitalWrite(RedLed, OFF);
+        digitalWrite(PurpleLed, OFF);
+        state = 1;
+        Serial.println("OFF");
+      }
+      NewMillis = CurrentMillis;
+  	}
+```
+
+Enquanto a variável end for diferente de 0, este espera de 500 a 500 ms e verifica se os LEDs dos utilizadores se encontram HIGH ou LOW, se forem HIGH define como LOW e se for LOW, define como HIGH, esta verificação é feita a partir da variável state, que verifica a alteração dos LEDs após cada um dos casos.
+
+```C++
+  if(
+        Blue == 1 or
+        Green == 1 or
+        Red == 1 or
+        Purple == 1
+      ){
+        end = 0;
+        Serial.println("Resume");
+        delay(500);
+        digitalWrite(BlueLed, ON);
+        digitalWrite(GreenLed, ON);
+        digitalWrite(RedLed, ON);
+        digitalWrite(PurpleLed, ON);
+      }
+      else{end = 1;}
+    }
+```
+
+Os botões são lidos e caso algum deles se encontre pressionado o jogo resume-se voltando à função loop(), igualando end a 1, para além disso liga todos os LEDs de utilizador. 
+
+```C++ 
+  RuleDefining();
+  int Rules();
+  Rules();
+```
+
+Esta função termina chamando RuleDefining, para alterar os LEDs representativos das regras para um novo valor e a função Rules() da biblioteca Rules.h, reproduzindo o som de aleatoriedade das regras. 
+
+### Conclusão
+---
+
+Juntando tudo isto é possível reproduzir-mos um programa que obedece às regras do jogo como pretendido e assim é possível utilizar este sistema para aplicar uma grande quantidade de regras, 16 de vitória de 16 de derrota, para ser mais específico. 
+
+Para utilização deste programa foi desenvolvido o seguinte PCB:
+
 
