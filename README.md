@@ -53,9 +53,73 @@ O programa começa por incluir as bibliotecas "Pitches.h", "Power_UP.h", "Rules.
 #include "Power_UP.h"
 ```
 Como funcionam estes? 
+
+Por exemplo:
+
 ## Músicas / Buzzer
 
-Por exemplo: 
+```C++
+int melodyRules[] = {
+  NOTE_C7,
+  NOTE_E7,
+  
+};
+
+int noteDurationsON[] = {8,8,};
+
+void setup() {
+  
+  for (int thisNoteON = 0; thisNoteON < 50; thisNoteON++) {
+  
+    int noteDurationON = 1000 / noteDurationsON[thisNoteON];
+    tone(3, melodyON[thisNoteON], noteDurationON);
+
+    int pauseBetweenNotesON = noteDurationON * 1;
+    delay(pauseBetweenNotesON);
+    
+    noTone(3);
+    
+  }
+}
+```
+Este código está organizado desta seguinte forma: 
+
+-Notas que irão ser utilizadas.
+```C++
+int melodyRules[] = {
+  NOTE_C7,
+  NOTE_E7,
+```
+
+-Duração das notas.
+```C++
+int noteDurationsON[] = {8,8,};
+```
+
+-Numero de notas a serem tocadas.
+```C++
+for (int thisNoteON = 0; thisNoteON < 50; thisNoteON++) 
+```
+
+
+-Calculo para obter o tempo que a nota vai durar.
+```C++
+int noteDurationON = 1000 / noteDurationsON[thisNoteON];
+    tone(3, melodyON[thisNoteON], noteDurationON);
+```
+
+
+-Pausa entre notas.
+```C++
+int pauseBetweenNotesON = noteDurationON * 1;
+    delay(pauseBetweenNotesON);
+```
+
+
+-Pin do buzzer.
+```C++
+noTone(3);
+```
 
 ## Definir os pin
 
