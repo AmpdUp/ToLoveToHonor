@@ -218,7 +218,7 @@ int DancyDance(){
     int CurrentMillis = millis();
     int WaitingTime = 500;
 
-  	if(CurrentMillis - NewMillis >= WaitingTime){
+    if(CurrentMillis - NewMillis >= WaitingTime){
       if(state == 1){
         digitalWrite(BlueLed, ON);
         digitalWrite(GreenLed, ON);
@@ -239,9 +239,9 @@ int DancyDance(){
   	}
     
     bool Blue = digitalRead(BlueButton);
-  	bool Green = digitalRead(GreenButton);
-  	bool Red = digitalRead(RedButton);
-  	bool Purple = digitalRead(PurpleButton);
+    bool Green = digitalRead(GreenButton);
+    bool Red = digitalRead(RedButton);
+    bool Purple = digitalRead(PurpleButton);
     
     if(
       Blue == 1 or
@@ -250,7 +250,7 @@ int DancyDance(){
       Purple == 1
     ){
       end = 0;
-      Serial.println("SEGUEE");
+      Serial.println("Resume");
       delay(500);
       digitalWrite(BlueLed, ON);
       digitalWrite(GreenLed, ON);
@@ -301,9 +301,9 @@ int Cry(){
   	}
     
     bool Blue = digitalRead(BlueButton);
-  	bool Green = digitalRead(GreenButton);
-  	bool Red = digitalRead(RedButton);
-  	bool Purple = digitalRead(PurpleButton);
+    bool Green = digitalRead(GreenButton);
+    bool Red = digitalRead(RedButton);
+    bool Purple = digitalRead(PurpleButton);
     
     if(
       Blue == 1 or
@@ -312,7 +312,7 @@ int Cry(){
       Purple == 1
     ){
       end = 0;
-      Serial.println("SEGUEE");
+      Serial.println("Resume");
       delay(500);
       digitalWrite(BlueLed, ON);
       digitalWrite(GreenLed, ON);
