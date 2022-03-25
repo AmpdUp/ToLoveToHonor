@@ -3,7 +3,7 @@
 ## Objetivo
 O objetivo deste projeto é criar um jogo com base num LED RGB que se encontra a mudar de cor (entre: Vermelho, Amarelo, Verde, Cyan, Azul, Magenta e Branco ), ao mesmo tempo 4 utilizadores são definidos por 4 cores definidas por LEDs (Azul, Verde, Vermelho e Roxo) e têm que carregar no seu respetivo botão no momento que o LED central reproduzir a sua cor.
 
-Para isso decidimos utilizar um Arduino Uno, utilizando os seguintes componentes connectados ao seguintes PINs:
+Para isso decidimos utilizar um Arduino Uno, utilizando os seguintes componentes conectados aos seguintes PINs:
 
 <div align="center">
   
@@ -31,7 +31,7 @@ Para isso decidimos utilizar um Arduino Uno, utilizando os seguintes componentes
 
 </div>
 
-Pode-se aceder a este circuito como simulação (da qual teve que ser expluída os tons do buzzer uma vez que não é possível incluir bibliotecas) em: 
+Pode-se aceder a este circuito como simulação (da qual teve que ser excluída os tons do buzzer uma vez que não é possível incluir bibliotecas) em: 
 
 
 ### Código
@@ -41,9 +41,9 @@ Para começar dividimos o circuito e programa em 5 partes:
 - Músicas / Buzzer
 - LED Aleatório (representa um número aleatório de 4 bits, um bit cada LED)
 - LED Central (LED que altera de cor)
-- Butões e LED de Utilizador (LEDs representativos da cor de cada utilizar e respetivos butões) 
+- Botões e LED de Utilizador (LEDs representativos da cor de cada utilizar e respetivos botões) 
 
-O programa começa por incluir as bibliotecas "Pitches.h", "Power_UP.h", "Rules.h", "Win.h" e "Lose.h" que são bibliotecas criadas para este jogo com o propósito de tocar músicas ou Tons por frequência a partir do Buzzer cujo volume pode ser controlado a partir do potenciometro.
+O programa começa por incluir as bibliotecas "Pitches.h", "Power_UP.h", "Rules.h", "Win.h" e "Lose.h" que são bibliotecas criadas para este jogo com o propósito de tocar músicas ou Tons por frequência a partir do Buzzer cujo volume pode ser controlado a partir do potenciómetro.
 
 ```C++
 #include "Pitches.h"
@@ -179,11 +179,11 @@ int ON = 0;
 int OFF = 1;
 ```
 
-Utilizado apenas de forma a que se possam usar vários tipos de LED, no nosso exemplo os pins dos LEDs RGB encontram-se connectados a 5V como saída o que significa que se estes estiverem "HIGH", eles econtram-se desligados pois não há diferença de potêncial, mas se estes estiverem "LOW" há diferença de potêncial entre a entrada e a saída de 5V o que liga os mesmos, daí ON ser 0, ou "LOW", e OFF ser 1, ou "HIGH".
+Utilizado apenas de forma a que se possam usar vários tipos de LED, no nosso exemplo os pins dos LEDs RGB encontram-se conectados a 5V como saída o que significa que se estes estiverem "HIGH", eles econtram-se desligados, pois não há diferença de potencial, mas se estes estiverem "LOW" há diferença de potencial entre a entrada e a saída de 5V o que liga os mesmos, daí ON ser 0, ou "LOW", e OFF ser 1, ou "HIGH".
 
 ## Setup
 
-Após essa configuração temos a função *void setup()* do nosso programa no qual nós identificamos os pins como entrada ou saída, sendo qualquer LED, uma saída (OUTPUT) assim como o Buzzer e qualquer butão como entrada (INPUT).
+Após essa configuração temos a função *void setup()* do nosso programa no qual nós identificamos os pins como entrada ou saída, sendo qualquer LED, uma saída (OUTPUT) assim como o Buzzer e qualquer botão como entrada (INPUT).
 
 ```C++
 void setup()
@@ -196,7 +196,7 @@ void setup()
   pinMode(PurpleLed, OUTPUT);
 ```
 
-Para além disso no final desta função chama-se as funções RuleDefining(), com o propósito de selecional um valor aleatório nos LEDs de Bits e apresentar esse valor, e Power_UP() para através do Buzzer reproduzir um som de início (como explicado antes) para simbolizar o ligar do dispositivo.
+Para além disso no final desta função chama-se as funções RuleDefining(), com o propósito de selecionar um valor aleatório nos LEDs de Bits e apresentar esse valor, e Power_UP() para através do Buzzer reproduzir um som de início (como explicado antes) para simbolizar o ligar do dispositivo.
 
 ```C++
   int Power_UP();
@@ -229,5 +229,5 @@ int RuleDefining(){
 }
 ```
 
-Utilizamos assim a funçãi random(0, 2) para identificar aleatóriamente valores entre 0 e 1 para cada um dos 4 Bits e uma vez que estes valores são 0 e 1 podem ser utilizados como "HIGH" e "LOW" pelos LEDs e definir assim o número aleatório.
+Utilizamos assim a função random(0, 2) para identificar aleatoriamente valores entre 0 e 1 para cada um dos 4 Bits e uma vez que estes valores são 0 e 1 podem ser utilizados como "HIGH" e "LOW" pelos LEDs e definir assim o número aleatório.
 
