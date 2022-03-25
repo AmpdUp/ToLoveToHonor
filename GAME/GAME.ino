@@ -250,7 +250,7 @@ int DancyDance(){
       Purple == 1
     ){
       end = 0;
-      Serial.println("SEGUEE");
+      Serial.println("Resume");
       delay(500);
       digitalWrite(BlueLed, ON);
       digitalWrite(GreenLed, ON);
@@ -312,7 +312,7 @@ int Cry(){
       Purple == 1
     ){
       end = 0;
-      Serial.println("SEGUEE");
+      Serial.println("Resume");
       delay(500);
       digitalWrite(BlueLed, ON);
       digitalWrite(GreenLed, ON);
