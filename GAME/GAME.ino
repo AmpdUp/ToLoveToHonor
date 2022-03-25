@@ -128,7 +128,6 @@ void loop()
 }
 
 int NewMillis = 0;
-int i = 0;
 int val = 7;
 
 String value(){
@@ -219,7 +218,7 @@ int DancyDance(){
     int CurrentMillis = millis();
     int WaitingTime = 500;
 
-  	if(CurrentMillis - NewMillis >= WaitingTime){
+    if(CurrentMillis - NewMillis >= WaitingTime){
       if(state == 1){
         digitalWrite(BlueLed, ON);
         digitalWrite(GreenLed, ON);
