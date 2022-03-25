@@ -41,7 +41,7 @@ Para começar dividimos o circuito e programa em 5 partes:
 - Músicas / Buzzer
 - LED Aleatório (representa um número aleatório de 4 bits, um bit cada LED)
 - LED Central (LED que altera de cor)
-- Botões e LED de Utilizador (LEDs representativos da cor de cada utilizar e respetivos botões) 
+- Botões e LED de Utilizador (LEDs representativos da cor de cada utilizador e respetivos botões) 
 
 O programa começa por incluir as bibliotecas "Pitches.h", "Power_UP.h", "Rules.h", "Win.h" e "Lose.h" que são bibliotecas criadas para este jogo com o propósito de tocar músicas ou Tons por frequência a partir do Buzzer cujo volume pode ser controlado a partir do potenciómetro.
 
@@ -96,13 +96,13 @@ int melodyRules[] = {
 int noteDurationsON[] = {8,8,};
 ```
 
--Numero de notas a serem tocadas.
+-Número de notas a serem tocadas.
 ```C++
 for (int thisNoteON = 0; thisNoteON < 50; thisNoteON++) 
 ```
 
 
--Calculo para obter o tempo que a nota vai durar.
+-Cálculo para obter o tempo de duração da nota.
 ```C++
 int noteDurationON = 1000 / noteDurationsON[thisNoteON];
     tone(3, melodyON[thisNoteON], noteDurationON);
@@ -121,9 +121,9 @@ int pauseBetweenNotesON = noteDurationON * 1;
 noTone(3);
 ```
 
-## Definir os pin
+## Definir os PINs
 
-Após isso o programa começa por definir os componentes e os respetivos Pins como descritos na tabela anterior.
+Após isso o programa começa por definir os componentes e os respetivos PINs como descritos na tabela anterior.
 
 ```C++
 #define BlueLed 13
