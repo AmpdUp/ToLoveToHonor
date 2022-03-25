@@ -301,9 +301,9 @@ int Cry(){
   	}
     
     bool Blue = digitalRead(BlueButton);
-  	bool Green = digitalRead(GreenButton);
-  	bool Red = digitalRead(RedButton);
-  	bool Purple = digitalRead(PurpleButton);
+    bool Green = digitalRead(GreenButton);
+    bool Red = digitalRead(RedButton);
+    bool Purple = digitalRead(PurpleButton);
     
     if(
       Blue == 1 or
