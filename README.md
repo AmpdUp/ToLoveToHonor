@@ -33,7 +33,7 @@ Para isso decidimos utilizar um Arduino Uno, utilizando os seguintes componentes
 
 Pode-se aceder a este circuito como simulação (da qual tiveram que ser excluídos os tons do buzzer uma vez que não é possível incluir bibliotecas) em:https://www.tinkercad.com/things/1aDpRejBSuC 
 
-https://www.tinkercad.com/things/9JUwBRJaoYC
+https://www.tinkercad.com/things/fSscfAOfeBM
 
 ### Código
 ---
