@@ -4,31 +4,38 @@
 #include "Lose.h"
 #include "Power_UP.h"
 
+//defining LEDs for Users
 #define PurpleLed 13
 #define RedLed 12
 #define GreenLed 11
 #define BlueLed 10
 
+//Defining LEDs for RuleDefining
 #define LedGame0 A1
 #define LedGame1 8
 #define LedGame2 A2
 #define LedGame3 9
 
+//Defining ButtonInputs
 #define PurpleButton 7
 #define RedButton 6
 #define GreenButton 5
 #define BlueButton 4
 
+//Defining Colors for CenterLED
 #define RLed A3
 #define BLed A4
 #define GLed A5
 
+//ON and OFF values varies to some LEDs depending if they are connected to GROUND or 5v
 int ON = 1;
 int OFF = 0;
 
 void setup() {
+  //Serial Started to Monitor the processes
   Serial.begin(9600);
 
+  //Pins defined as INPUT or OUTPUT
   pinMode(BlueLed, OUTPUT);
   pinMode(GreenLed, OUTPUT);
   pinMode(RedLed, OUTPUT);
@@ -53,6 +60,7 @@ void setup() {
   digitalWrite(RedLed, ON);
   digitalWrite(PurpleLed, ON);
 
+  //Sounds from libraries played to represent powering the device
   int Power_UP();
   Power_UP();
   int RuleDefining();
@@ -60,23 +68,29 @@ void setup() {
 }
 
 void loop() {
+  //Boolean values defined for the User LEDs
   bool Blue = digitalRead(BlueButton);
   bool Green = digitalRead(GreenButton);
   bool Red = digitalRead(RedButton);
   bool Purple = digitalRead(PurpleButton);
-
+  
+  //Defined Musics for Victory and Defeat
   int DancyDance();
   int Cry();
-
+  
+  //function for the Center LED
   value();
   String ColorState = value();
-  //Serial.println(ColorState);
-
+  //Serial.println(ColorState);//Used for Troubleshooting
+  
+  //If center color is the same as User color
   if (Blue == 1) {
+    //Victory
     if (ColorState == "Blue") {
       Serial.println("Win");
       delay(500);
       DancyDance();
+    //Defeat
     } else {
       Serial.println("Lose");
       delay(500);
@@ -121,26 +135,32 @@ void loop() {
   }
 }
 
+//Variables used for the millis function
 int NewMillis = 0;
 int val = 0;
 
 String value() {
-
+  
+  //CurrentMillis = Amount of milliseconds passed since the powered
   int CurrentMillis = millis();
   int WaitingTime = 500;
-
+  
+  //random seed pulled from A0 whose value is random since this is disconnected
   randomSeed(analogRead(0));
-
+  
+  //if the amount of seconds minus NewMillis greater or equal to 500ms
   if (CurrentMillis - NewMillis >= WaitingTime) {
+    //Generate new random value
     val = random(0, 6);
     NewMillis = CurrentMillis;
-    //Serial.println(val);
+    //Serial.println(val);//Used for troubleshooting
   }
 
   String Color;
-
+  
+  //Random Value Switch
   switch (val) {
-
+    //If random value is 0 Red is the color shown
     case 0:
       Color = "Red";
       digitalWrite(RLed, ON);
@@ -197,12 +217,14 @@ String value() {
 }
 
 int DancyDance() {
-
+  
+  // All User LEDs go off
   digitalWrite(BlueLed, OFF);
   digitalWrite(GreenLed, OFF);
   digitalWrite(RedLed, OFF);
   digitalWrite(PurpleLed, OFF);
 
+  //Used to read Used LEDs state
   bool state = 0;
   int end = 1;
   int Win();
@@ -238,10 +260,13 @@ int DancyDance() {
     bool Purple = digitalRead(PurpleButton);
 
     if (
+      //Any of the buttons is pressed
       Blue == 1 or Green == 1 or Red == 1 or Purple == 1) {
+      //Game Ends
       end = 0;
       Serial.println("Resume");
       delay(500);
+      //All User LEDs turn ON
       digitalWrite(BlueLed, ON);
       digitalWrite(GreenLed, ON);
       digitalWrite(RedLed, ON);
@@ -250,6 +275,7 @@ int DancyDance() {
       end = 1;
     }
   }
+  //Rules Change as its gingle plays
   int Rules();
   Rules();
   RuleDefining();
