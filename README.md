@@ -27,7 +27,7 @@ Para isso decidimos utilizar um Arduino Uno, utilizando os seguintes componentes
 | LED Central RGB G  |      A5     | Led Central                                  |
   
   
-<img src="[https://github.com/PedroTorrado/Projeto-SDAC/blob/d259d88f4ec4b43909e0990faefa7ffc6630c431/Images/Circuit.png](https://github.com/AmpdUp/ToLoveToHonor/blob/be7f984c148ed60bbc7e640a0dbae8b8ab025699/Images/Circuit.png)" width="600"/>
+<img src="(https://github.com/AmpdUp/ToLoveToHonor/blob/be7f984c148ed60bbc7e640a0dbae8b8ab025699/Images/Circuit.png)" width="600"/>
 
 </div>
 
