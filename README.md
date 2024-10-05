@@ -393,6 +393,6 @@ Para utilização deste programa foi desenvolvido o seguinte PCB:
 
 <div align="center">
 
-<img src="https://github.com/PedroTorrado/Projeto-SDAC/blob/d259d88f4ec4b43909e0990faefa7ffc6630c431/Images/PCB.png" width="600"/>
+<img src="https://github.com/AmpdUp/ToLoveToHonor/blob/24476d542340534c5cc68b86112d7850e01259cd/Images/PCB.png"/>
   
 </dic>
